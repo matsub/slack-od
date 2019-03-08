@@ -147,6 +147,6 @@ function slashcommand (feature, response_type='ephemeral') {
 
 exports.slashODEnable = slashcommand(enable, 'in_channel')
 exports.slashODDisable = slashcommand(disable, 'in_channel')
-exports.slashODNice = slashcommand(nice)
-exports.slashODAskMe = slashcommand(askme)
-exports.slashODAsk = slashcommand(ask)
+exports.slashODNice = slashcommand(nice, 'in_channel')
+exports.slashODAskMe = slashcommand(askme, 'in_channel')
+exports.slashODAsk = slashcommand(ask, 'in_channel')
