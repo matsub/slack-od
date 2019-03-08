@@ -23,6 +23,18 @@ function getUname (req) {
 
 async function enable (req) {
   const uname = getUname(req)
+
+  // check if already registered
+  const query = datastore
+    .createQuery('opportunityDistributor')
+    .filter('uname', '=', uname)
+  const [entities] = await datastore.runQuery(query)
+
+  if (entities.length > 0) {
+    return `Already registered: ${uname}`
+  }
+
+  // register new user
   const key = datastore.key('opportunityDistributor')
   const entity = { key, data: { uname, nice: 10 } }
 
@@ -82,7 +94,7 @@ async function nice (req) {
     .filter('uname', '=', uname)
 
   const [[entity]] = await datastore.runQuery(query)
-  return increaseNice(entity)
+  return decreaseNice(entity)
 }
 
 
@@ -94,7 +106,7 @@ async function askme (req) {
 
   const [[entity]] = await datastore.runQuery(query)
 
-  return decreaseNice(entity)
+  return increaseNice(entity)
 }
 
 
@@ -109,9 +121,9 @@ async function ask (req) {
 
   for (const entity of entities) {
     if (entity.uname === niceone.uname) {
-      increaseNice(entity)
-    } else {
       decreaseNice(entity)
+    } else {
+      increaseNice(entity)
     }
   }
 
