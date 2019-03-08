@@ -1,0 +1,13 @@
+{
+  "name": "slack-od",
+  "author": "matsub <matsub.rk@gmail.com>",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "eslint": "^5.15.1"
+  },
+  "dependencies": {
+    "@google-cloud/datastore": "^3.1.1"
+  }
+}
