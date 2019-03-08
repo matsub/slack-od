@@ -1,14 +1,17 @@
 const { Datastore } = require('@google-cloud/datastore')
 const datastore = new Datastore()
 
+const NICE_MAX = 20
+
 
 // weighted random
+// a nicer one has lower chance to be chosen than another
 function chooseNiceone (entities) {
-  const sum = entities.reduce((acm, cur) => acm + cur.nice, 0)
-  let threashold = Math.random() * sum
+  const niceSum = entities.reduce((acm, cur) => acm + (NICE_MAX - cur.nice), 0)
+  let threashold = Math.random() * niceSum
 
   for (const entity of entities) {
-    threashold -= entity.nice
+    threashold -= (NICE_MAX - entity.nice)
     if (threashold <= 0) {
       return entity
     }
@@ -62,7 +65,7 @@ async function disable (req) {
 async function increaseNice (entity) {
   const key = entity[datastore.KEY]
 
-  if (entity.nice+1 < 40) {
+  if (entity.nice+1 < NICE_MAX) {
     await datastore.update({
       key,
       data: { uname: entity.uname, nice: entity.nice+1 }
@@ -94,7 +97,7 @@ async function nice (req) {
     .filter('uname', '=', uname)
 
   const [[entity]] = await datastore.runQuery(query)
-  return decreaseNice(entity)
+  return increaseNice(entity)
 }
 
 
@@ -106,7 +109,7 @@ async function askme (req) {
 
   const [[entity]] = await datastore.runQuery(query)
 
-  return increaseNice(entity)
+  return decreaseNice(entity)
 }
 
 
@@ -121,9 +124,9 @@ async function ask (req) {
 
   for (const entity of entities) {
     if (entity.uname === niceone.uname) {
-      decreaseNice(entity)
-    } else {
       increaseNice(entity)
+    } else {
+      decreaseNice(entity)
     }
   }
 
