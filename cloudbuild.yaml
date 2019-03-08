@@ -13,5 +13,3 @@ steps:
   args: ['functions', 'deploy', 'slashODAskMe', '--runtime=nodejs8', '--trigger-http', '--region=asia-northeast1']
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['functions', 'deploy', 'slashODAsk', '--runtime=nodejs8', '--trigger-http', '--region=asia-northeast1']
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', 'slashODDontAskMe', '--runtime=nodejs8', '--trigger-http', '--region=asia-northeast1']
