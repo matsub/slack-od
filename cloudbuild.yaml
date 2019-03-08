@@ -4,12 +4,12 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'lint']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', 'slashODEnable', '--runtime=nodejs8', '--trigger-http', '--region=asia-northeast1']
+  args: ['functions', 'deploy', 'slashODEnable', '--runtime=nodejs8', '--trigger-http']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', 'slashODDisable', '--runtime=nodejs8', '--trigger-http', '--region=asia-northeast1']
+  args: ['functions', 'deploy', 'slashODDisable', '--runtime=nodejs8', '--trigger-http']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', 'slashODNice', '--runtime=nodejs8', '--trigger-http', '--region=asia-northeast1']
+  args: ['functions', 'deploy', 'slashODNice', '--runtime=nodejs8', '--trigger-http']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', 'slashODAskMe', '--runtime=nodejs8', '--trigger-http', '--region=asia-northeast1']
+  args: ['functions', 'deploy', 'slashODAskMe', '--runtime=nodejs8', '--trigger-http']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', 'slashODAsk', '--runtime=nodejs8', '--trigger-http', '--region=asia-northeast1']
+  args: ['functions', 'deploy', 'slashODAsk', '--runtime=nodejs8', '--trigger-http']
